@@ -1,12 +1,28 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Redirecting…</title>
-		<meta http-equiv="refresh" content="0; URL=cedrick-rojas-portfolio_2.html">
-	</head>
-	<body>
-		<p>Redirecting to <a href="cedrick-rojas-portfolio_2.html">cedrick-rojas-portfolio_2.html</a>. If you are not redirected, click the link.</p>
-	</body>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Cedrick Rojas — Full-Stack & IoT Developer</title>
+	<meta name="description" content="Cedrick Rojas portfolio." />
+	<script>
+		(async function () {
+			try {
+				const response = await fetch('cedrick-rojas-portfolio_2.html', { cache: 'no-store' });
+				if (!response.ok) throw new Error('Failed to load portfolio');
+				const html = await response.text();
+				document.open();
+				document.write(html);
+				document.close();
+			} catch (error) {
+				document.body.innerHTML = '<p style="font-family: sans-serif; padding: 24px;">Unable to load the portfolio. Please open <a href="cedrick-rojas-portfolio_2.html">cedrick-rojas-portfolio_2.html</a>.</p>';
+			}
+		})();
+	</script>
+</head>
+<body>
+	<noscript>
+		<p style="font-family: sans-serif; padding: 24px;">JavaScript is required to load the portfolio. Open <a href="cedrick-rojas-portfolio_2.html">cedrick-rojas-portfolio_2.html</a>.</p>
+	</noscript>
+</body>
 </html>
