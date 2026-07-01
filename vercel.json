@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/cedrick-rojas-portfolio_2.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
