@@ -728,7 +728,8 @@ var themeMeta = document.querySelector('meta[name="theme-color"]');
 function getTheme(){
   var saved = localStorage.getItem('cr-theme');
   if(saved === 'light' || saved === 'dark') return saved;
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  // Default to dark mode when the user has not previously chosen a theme
+  return 'dark';
 }
 
 function applyTheme(theme){
