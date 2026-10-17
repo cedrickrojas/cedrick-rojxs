@@ -370,6 +370,7 @@ section{ position:relative; padding:108px 0; z-index:2; }
 .field input:focus,.field textarea:focus{ outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(235,177,62,.12); }
 .field textarea{ resize:vertical; min-height:120px; }
 .form-card .btn-primary{ width:100%; justify-content:center; }
+.form-card .btn-primary:disabled{ cursor:wait; opacity:.7; }
 .form-msg{ margin-top:14px; font-family:var(--mono); font-size:12.5px; color:var(--sage); display:none; align-items:center; gap:9px; }
 .form-msg.show{ display:flex; }
 .form-msg svg{ width:16px; height:16px; flex:none; }
@@ -454,10 +455,10 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
       <span>Cedrick Rojas<small>BSIT · Developer</small></span>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="#projects">Projects</a>
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#journey">Journey</a>
-      <a href="#projects">Projects</a>
       <a href="#contact" class="nav-cta magnetic" data-mag="0.4">Get in touch</a>
       <button class="theme-btn magnetic" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="false" data-mag="0.35">
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 13.5A8.5 8.5 0 1110.5 3a7 7 0 0010.5 10.5z"/></svg>
@@ -502,16 +503,20 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
           View Projects
         </a>
         <a href="#contact" class="btn btn-line magnetic" data-mag="0.35">Contact Me</a>
+        <a href="assets/Cedrick-Rojas-CV.pdf" download="Cedrick-Rojas-CV.pdf" class="btn btn-line magnetic" data-mag="0.35">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 16v5h14v-5"/></svg>
+          Download CV
+        </a>
       </div>
       <div class="socials hi" aria-label="Social links">
-        <a href="https://www.instagram.com/zxd.wrld" target="_blank" rel="noopener" aria-label="Instagram" class="magnetic" data-mag="0.5">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <a href="https://www.facebook.com/zxd.wrld" target="_blank" rel="noopener" aria-label="Facebook" class="magnetic" data-mag="0.5">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h2.5l.5-3H14V4.5c0-.88.29-1.5 1.62-1.5H17V.25A21.7 21.7 0 0014.88 0C12.56 0 11 1.42 11 4v2H8v3h3v11h3V9z"/></svg>
+        <a href="https://github.com/cedrickrojas" target="_blank" rel="noopener" aria-label="GitHub" class="magnetic" data-mag="0.5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 00-.9-2.7c3-.3 6.2-1.5 6.2-6.9a5.4 5.4 0 00-1.5-3.7 5 5 0 00-.1-3.7s-1.2-.4-3.9 1.4a13.4 13.4 0 00-7 0C5.1.7 3.9 1.1 3.9 1.1a5 5 0 00-.1 3.7 5.4 5.4 0 00-1.5 3.7c0 5.4 3.2 6.6 6.2 6.9a3.4 3.4 0 00-.9 2.7V22"/></svg>
         </a>
         <a href="mailto:rojascedrick543@gmail.com" aria-label="Email" class="magnetic" data-mag="0.5">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5l9 6 9-6"/></svg>
+        </a>
+        <a href="https://www.facebook.com/zxd.wrld" target="_blank" rel="noopener" aria-label="Facebook" class="magnetic" data-mag="0.5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h2.5l.5-3H14V4.5c0-.88.29-1.5 1.62-1.5H17V.25A21.7 21.7 0 0014.88 0C12.56 0 11 1.42 11 4v2H8v3h3v11h3V9z"/></svg>
         </a>
       </div>
     </div>
@@ -537,99 +542,11 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
   <div class="scroll-cue" aria-hidden="true"><span>scroll</span><span class="ln"></span></div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>React</span><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>MySQL</span><span>Tailwind</span><span>Python</span><span>Java</span><span>C#</span><span>Arduino</span><span>IoT</span><span>Machine Learning</span><span>REST APIs</span><span>Git</span>
-    <span>React</span><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>MySQL</span><span>Tailwind</span><span>Python</span><span>Java</span><span>C#</span><span>Arduino</span><span>IoT</span><span>Machine Learning</span><span>REST APIs</span><span>Git</span>
-  </div>
-</div>
-
-<!-- STATS -->
-<section style="padding-top:70px;padding-bottom:70px">
-  <div class="wrap">
-    <div class="stats reveal">
-      <div class="stat"><div class="num"><span class="count" data-to="4">0</span><span class="suf">th</span></div><div class="lbl">Year · BSIT</div></div>
-      <div class="stat"><div class="num"><span class="count" data-to="22">0</span><span class="suf">+</span></div><div class="lbl">Technologies &amp; tools</div></div>
-      <div class="stat"><div class="num"><span class="count" data-to="6">0</span></div><div class="lbl">Core skill domains</div></div>
-      <div class="stat"><div class="num"><span class="count" data-to="1">0</span></div><div class="lbl">Flagship IoT + AI build</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-index scramble" data-text="01 / ABOUT">01 / ABOUT</span>
-      <h2>Hardware, software, and the space between.</h2>
-      <p>A developer who's just as comfortable wiring a sensor as shipping a web app.</p>
-    </div>
-    <div class="about-grid">
-      <div class="reveal">
-        <p class="about-lead">I'm a 4th-year BSIT student at Mindoro State University with a strong interest in full-stack development, IoT, networking, database systems, and software engineering.</p>
-        <p class="about-body">Through academic projects and hands-on development, I've built solutions that integrate web technologies, hardware systems, and intelligent applications — from sensor networks in the field to dashboards in the browser. My goal is to contribute to impactful technology projects while continuously growing as a software developer.</p>
-        <div class="pillars stagger">
-          <div class="pillar"><div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/></svg></div><h4>Educational Background</h4><p>BS Information Technology, Mindoro State University — focused on software engineering, networking, and data systems.</p></div>
-          <div class="pillar"><div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div><h4>Technical Interests</h4><p>Full-stack web development, IoT and embedded systems, database design, and applied machine learning.</p></div>
-          <div class="pillar"><div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></div><h4>Career Goals</h4><p>To join a team building real products, grow into a well-rounded engineer, and ship technology that solves genuine problems.</p></div>
-          <div class="pillar"><div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>Professional Values</h4><p>Curiosity, reliability, clean and maintainable code, and a user-centered approach to every build.</p></div>
-        </div>
-      </div>
-      <div class="spec reveal" aria-label="Profile summary">
-        <h5><span class="dot"></span> Profile</h5>
-        <div class="spec-row"><span class="k">Name</span><span class="v">Cedrick Rojas</span></div>
-        <div class="spec-row"><span class="k">Program</span><span class="v">BS Information Technology</span></div>
-        <div class="spec-row"><span class="k">Year</span><span class="v">4th Year</span></div>
-        <div class="spec-row"><span class="k">University</span><span class="v">Mindoro State University</span></div>
-        <div class="spec-row"><span class="k">Location</span><span class="v">Mindoro, Philippines</span></div>
-        <div class="spec-row"><span class="k">Focus</span><span class="v">Full-Stack · IoT · Data</span></div>
-        <div class="spec-row"><span class="k">Status</span><span class="v">Open to internships</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-index scramble" data-text="02 / SKILLS">02 / SKILLS</span>
-      <h2>The stack I build with.</h2>
-      <p>Tools and technologies across the full software and hardware pipeline.</p>
-    </div>
-    <div class="skills-grid stagger">
-      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div><h4>Frontend</h4><span class="sc-num">01</span></div><div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">React.js</span><span class="tag">Next.js</span><span class="tag">Tailwind CSS</span></div></div>
-      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div><h4>Backend</h4><span class="sc-num">02</span></div><div class="tags"><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">REST APIs</span></div></div>
-      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div><h4>Database</h4><span class="sc-num">03</span></div><div class="tags"><span class="tag">MongoDB</span><span class="tag">MySQL</span></div></div>
-      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6M13 4l-2 16"/></svg></div><h4>Languages</h4><span class="sc-num">04</span></div><div class="tags"><span class="tag">C#</span><span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript</span></div></div>
-      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg></div><h4>IoT &amp; Embedded</h4><span class="sc-num">05</span></div><div class="tags"><span class="tag">Arduino</span><span class="tag">Sensor Integration</span><span class="tag">IoT Development</span></div></div>
-      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 00-5.4 5.4l-6 6a2 2 0 102.8 2.8l6-6a4 4 0 005.4-5.4l-2.5 2.5-2.8-.7-.7-2.8z"/></svg></div><h4>Tools</h4><span class="sc-num">06</span></div><div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">Postman</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- JOURNEY -->
-<section id="journey">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-index scramble" data-text="03 / JOURNEY">03 / JOURNEY</span>
-      <h2>How I got here.</h2>
-      <p></p>
-    </div>
-    <div class="timeline stagger">
-      <div class="tl-item"><span class="node"></span><div class="when">1st – 2nd Year</div><h4>Foundations</h4><p>Programming fundamentals in C#, Java, and Python, plus core web technologies, data structures, and computer networking.</p></div>
-      <div class="tl-item"><span class="node"></span><div class="when">3rd Year</div><h4>Full-Stack &amp; Data</h4><p>Moved into modern web development with React and Next.js on the front end, Node.js and Express on the back end, and relational + document databases (MySQL, MongoDB) behind REST APIs.</p></div>
-      <div class="tl-item"><span class="node"></span><div class="when">4th Year · Now</div><h4>Capstone &amp; IoT</h4><p>Leading PinyaSense — an IoT + machine-learning agriculture platform — while bringing hardware, data, and the web together into one product. Open to internships and entry-level roles.</p></div>
-    </div>
-  </div>
-</section>
-
 <!-- PROJECTS -->
 <section id="projects">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-index scramble" data-text="04 / PROJECTS">04 / PROJECTS</span>
+      <span class="sec-index scramble" data-text="01 / PROJECTS">01 / PROJECTS</span>
       <h2>Selected work.</h2>
       <p>From sensor networks in the field to full-stack platforms in the browser.</p>
     </div>
@@ -687,6 +604,94 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
   </div>
 </section>
 
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>React</span><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>MySQL</span><span>Tailwind</span><span>Python</span><span>Java</span><span>C#</span><span>Arduino</span><span>IoT</span><span>Machine Learning</span><span>REST APIs</span><span>Git</span>
+    <span>React</span><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>MySQL</span><span>Tailwind</span><span>Python</span><span>Java</span><span>C#</span><span>Arduino</span><span>IoT</span><span>Machine Learning</span><span>REST APIs</span><span>Git</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section style="padding-top:70px;padding-bottom:70px">
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><div class="num"><span class="count" data-to="4">0</span><span class="suf">th</span></div><div class="lbl">Year · BSIT</div></div>
+      <div class="stat"><div class="num"><span class="count" data-to="22">0</span><span class="suf">+</span></div><div class="lbl">Technologies &amp; tools</div></div>
+      <div class="stat"><div class="num"><span class="count" data-to="6">0</span></div><div class="lbl">Core skill domains</div></div>
+      <div class="stat"><div class="num"><span class="count" data-to="1">0</span></div><div class="lbl">Flagship IoT + AI build</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-index scramble" data-text="02 / ABOUT">02 / ABOUT</span>
+      <h2>Hardware, software, and the space between.</h2>
+      <p>A developer who's just as comfortable wiring a sensor as shipping a web app.</p>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p class="about-lead">I'm a 4th-year BSIT student at Mindoro State University with a strong interest in full-stack development, IoT, networking, database systems, and software engineering.</p>
+        <p class="about-body">Through academic projects and hands-on development, I've built solutions that integrate web technologies, hardware systems, and intelligent applications — from sensor networks in the field to dashboards in the browser. My goal is to contribute to impactful technology projects while continuously growing as a software developer.</p>
+        <div class="pillars stagger">
+          <div class="pillar"><div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/></svg></div><h4>Educational Background</h4><p>BS Information Technology, Mindoro State University — focused on software engineering, networking, and data systems.</p></div>
+          <div class="pillar"><div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div><h4>Technical Interests</h4><p>Full-stack web development, IoT and embedded systems, database design, and applied machine learning.</p></div>
+          <div class="pillar"><div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></div><h4>Career Goals</h4><p>To join a team building real products, grow into a well-rounded engineer, and ship technology that solves genuine problems.</p></div>
+          <div class="pillar"><div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>Professional Values</h4><p>Curiosity, reliability, clean and maintainable code, and a user-centered approach to every build.</p></div>
+        </div>
+      </div>
+      <div class="spec reveal" aria-label="Profile summary">
+        <h5><span class="dot"></span> Profile</h5>
+        <div class="spec-row"><span class="k">Name</span><span class="v">Cedrick Rojas</span></div>
+        <div class="spec-row"><span class="k">Program</span><span class="v">BS Information Technology</span></div>
+        <div class="spec-row"><span class="k">Year</span><span class="v">4th Year</span></div>
+        <div class="spec-row"><span class="k">University</span><span class="v">Mindoro State University</span></div>
+        <div class="spec-row"><span class="k">Location</span><span class="v">Mindoro, Philippines</span></div>
+        <div class="spec-row"><span class="k">Focus</span><span class="v">Full-Stack · IoT · Data</span></div>
+        <div class="spec-row"><span class="k">Status</span><span class="v">Open to internships</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-index scramble" data-text="03 / SKILLS">03 / SKILLS</span>
+      <h2>The stack I build with.</h2>
+      <p>Tools and technologies across the full software and hardware pipeline.</p>
+    </div>
+    <div class="skills-grid stagger">
+      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div><h4>Frontend</h4><span class="sc-num">01</span></div><div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">React.js</span><span class="tag">Next.js</span><span class="tag">Tailwind CSS</span></div></div>
+      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div><h4>Backend</h4><span class="sc-num">02</span></div><div class="tags"><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">REST APIs</span></div></div>
+      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div><h4>Database</h4><span class="sc-num">03</span></div><div class="tags"><span class="tag">MongoDB</span><span class="tag">MySQL</span></div></div>
+      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6M13 4l-2 16"/></svg></div><h4>Languages</h4><span class="sc-num">04</span></div><div class="tags"><span class="tag">C#</span><span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript</span></div></div>
+      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg></div><h4>IoT &amp; Embedded</h4><span class="sc-num">05</span></div><div class="tags"><span class="tag">Arduino</span><span class="tag">Sensor Integration</span><span class="tag">IoT Development</span></div></div>
+      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 00-5.4 5.4l-6 6a2 2 0 102.8 2.8l6-6a4 4 0 005.4-5.4l-2.5 2.5-2.8-.7-.7-2.8z"/></svg></div><h4>Tools</h4><span class="sc-num">06</span></div><div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">Postman</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-index scramble" data-text="04 / JOURNEY">04 / JOURNEY</span>
+      <h2>How I got here.</h2>
+      <p></p>
+    </div>
+    <div class="timeline stagger">
+      <div class="tl-item"><span class="node"></span><div class="when">1st – 2nd Year</div><h4>Foundations</h4><p>Programming fundamentals in C#, Java, and Python, plus core web technologies, data structures, and computer networking.</p></div>
+      <div class="tl-item"><span class="node"></span><div class="when">3rd Year</div><h4>Full-Stack &amp; Data</h4><p>Moved into modern web development with React and Next.js on the front end, Node.js and Express on the back end, and relational + document databases (MySQL, MongoDB) behind REST APIs.</p></div>
+      <div class="tl-item"><span class="node"></span><div class="when">4th Year · Now</div><h4>Capstone &amp; IoT</h4><p>Leading PinyaSense — an IoT + machine-learning agriculture platform — while bringing hardware, data, and the web together into one product. Open to internships and entry-level roles.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="wrap">
@@ -696,19 +701,22 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
         <h2>Let's build something.</h2>
         <p>Open to internships, project collaborations, and entry-level opportunities. Reach out — I usually reply within a day.</p>
         <div class="contact-channels stagger">
-          <a class="channel" href="mailto:cedrick.rojas@example.com"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5l9 6 9-6"/></svg></span><span class="ct"><small>Email</small><b>rojascedrick543@gmail.com</b></span></a>
-          <a class="channel" href="https://www.instagram.com/zxd.wrld" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></span><span class="ct"><small>Instagram</small><b>@zxd.wrld</b></span></a>
+          <a class="channel" href="https://github.com/cedrickrojas" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 00-.9-2.7c3-.3 6.2-1.5 6.2-6.9a5.4 5.4 0 00-1.5-3.7 5 5 0 00-.1-3.7s-1.2-.4-3.9 1.4a13.4 13.4 0 00-7 0C5.1.7 3.9 1.1 3.9 1.1a5 5 0 00-.1 3.7 5.4 5.4 0 00-1.5 3.7c0 5.4 3.2 6.6 6.2 6.9a3.4 3.4 0 00-.9 2.7V22"/></svg></span><span class="ct"><small>GitHub</small><b>@cedrickrojas</b></span></a>
+          <a class="channel" href="mailto:rojascedrick543@gmail.com"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5l9 6 9-6"/></svg></span><span class="ct"><small>Email</small><b>rojascedrick543@gmail.com</b></span></a>
           <a class="channel" href="https://www.facebook.com/zxd.wrld" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h2.5l.5-3H14V4.5c0-.88.29-1.5 1.62-1.5H17V.25A21.7 21.7 0 0014.88 0C12.56 0 11 1.42 11 4v2H8v3h3v11h3V9z"/></svg></span><span class="ct"><small>Facebook</small><b>@zxd.wrld</b></span></a>
         </div>
       </div>
-      <div class="form-card reveal">
-        <div class="field"><label for="cname">Name</label><input id="cname" type="text" placeholder="YOUR NAME" autocomplete="name" /></div>
-        <div class="field"><label for="cemail">Email</label><input id="cemail" type="email" placeholder="YOU@EXAMPLE.COM" autocomplete="email" /></div>
-        <div class="field"><label for="cmsg">Message</label><textarea id="cmsg" placeholder="TELL ME ABOUT THE ROLE OR PROJECT"></textarea></div>
-        <button class="btn btn-primary" id="sendBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> Send Message</button>
-        <div class="form-msg" id="formMsg"></div>
-        <p class="form-hint"></p>
-      </div>
+      <form class="form-card reveal" id="contactForm" action="https://formsubmit.co/rojascedrick543@gmail.com" method="post" aria-describedby="contactHint">
+        <input type="hidden" name="_subject" value="New portfolio inquiry - Cedrick Rojas" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="field"><label for="cname">Name</label><input id="cname" name="name" type="text" placeholder="YOUR NAME" autocomplete="name" required /></div>
+        <div class="field"><label for="cemail">Email</label><input id="cemail" name="email" type="email" placeholder="YOU@EXAMPLE.COM" autocomplete="email" required /></div>
+        <div class="field"><label for="cmsg">Message</label><textarea id="cmsg" name="message" placeholder="TELL ME ABOUT THE ROLE OR PROJECT" required></textarea></div>
+        <button class="btn btn-primary" id="sendBtn" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> <span id="sendLabel">Send Message</span></button>
+        <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+        <p class="form-hint" id="contactHint">Prefer email? Write to <a href="mailto:rojascedrick543@gmail.com">rojascedrick543@gmail.com</a> directly.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -718,7 +726,7 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
 <footer>
   <div class="wrap foot-inner">
     <p>© <span id="year"></span> Cedrick Rojas · Built with care.</p>
-    <div class="foot-soc"><a href="https://www.instagram.com/zxd.wrld" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/zxd.wrld" target="_blank" rel="noopener">Facebook</a><a href="mailto:cedrick.rojas@example.com">Email</a></div>
+    <div class="foot-soc"><a href="https://github.com/cedrickrojas" target="_blank" rel="noopener">GitHub</a><a href="https://www.instagram.com/zxd.wrld" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/zxd.wrld" target="_blank" rel="noopener">Facebook</a><a href="mailto:rojascedrick543@gmail.com">Email</a></div>
   </div>
 </footer>
 
@@ -947,17 +955,41 @@ if(themeToggle){
   },2200);
 })();
 
-/* ===== RESUME PLACEHOLDER FEEDBACK REMOVED ===== */
-
-/* ===== CONTACT FORM (demo) ===== */
+/* ===== CONTACT FORM VIA FORMSUBMIT ===== */
 (function(){
-  var btn=document.getElementById('sendBtn'), msg=document.getElementById('formMsg');
-  var ok='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 6"/></svg>';
-  var warn='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg>';
-  btn.addEventListener('click',function(){
-    var name=document.getElementById('cname').value.trim(), email=document.getElementById('cemail').value.trim(), body=document.getElementById('cmsg').value.trim();
-    if(!name||!email||!body){ msg.style.color='#c96b5a'; msg.innerHTML=warn+' Please fill in all fields.'; msg.classList.add('show'); return; }
-    msg.style.color='var(--sage)'; msg.innerHTML=ok+' Thanks, '+name.split(' ')[0]+' — your message is ready to send.'; msg.classList.add('show');
+  var form=document.getElementById('contactForm'), msg=document.getElementById('formMsg');
+  var btn=document.getElementById('sendBtn'), label=document.getElementById('sendLabel');
+  var fields=[document.getElementById('cname'),document.getElementById('cemail'),document.getElementById('cmsg')];
+  var submitting=false;
+  fields.forEach(function(field){
+    field.addEventListener('input',function(){
+      field.setCustomValidity('');
+      msg.textContent='';
+      msg.classList.remove('show');
+    });
+  });
+  form.addEventListener('submit',function(event){
+    if(submitting){ event.preventDefault(); return; }
+    fields.forEach(function(field){
+      field.value=field.value.trim();
+      field.setCustomValidity(field.value.trim() ? '' : 'Please fill in this field.');
+    });
+    if(!form.reportValidity()){ event.preventDefault(); return; }
+    submitting=true;
+    btn.disabled=true;
+    label.textContent='Submitting...';
+    form.setAttribute('aria-busy','true');
+    msg.textContent='Continue on the next page to complete verification and submit your message.';
+    msg.classList.add('show');
+    // Allow the browser to POST to FormSubmit, including its verification flow.
+  });
+  window.addEventListener('pageshow',function(){
+    submitting=false;
+    btn.disabled=false;
+    label.textContent='Send Message';
+    form.removeAttribute('aria-busy');
+    msg.textContent='';
+    msg.classList.remove('show');
   });
 })();
 
