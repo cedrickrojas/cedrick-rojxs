@@ -44,7 +44,7 @@
   --shadow:0 24px 60px -28px rgba(0,0,0,0.85), 0 8px 24px -16px rgba(0,0,0,0.6);
   --glow-gold:0 0 0 1px rgba(235,177,62,0.18), 0 16px 44px -18px rgba(235,177,62,0.40);
   --display:"Space Grotesk",sans-serif; --body:"DM Sans",sans-serif; --mono:"JetBrains Mono",monospace;
-  --maxw:1160px; --ease:cubic-bezier(.22,.61,.36,1); --ease-out:cubic-bezier(.16,1,.3,1);
+  --maxw:1160px; --nav-offset:84px; --ease:cubic-bezier(.22,.61,.36,1); --ease-out:cubic-bezier(.16,1,.3,1);
 }
 
   html[data-theme="light"]{
@@ -64,7 +64,7 @@
   html[data-theme="light"] .bg-grid{ mask-image:radial-gradient(130% 100% at 50% 0%,#000 28%,transparent 76%); }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; scrollbar-gutter:stable; }
+html{ scroll-behavior:smooth; scroll-padding-top:var(--nav-offset); -webkit-text-size-adjust:100%; scrollbar-gutter:stable; }
 body{
   background:var(--bg); color:var(--ink); font-family:var(--body);
   font-size:16px; line-height:1.6; overflow-x:hidden;
@@ -131,11 +131,11 @@ h1,h2,h3{ font-family:var(--display); font-weight:600; line-height:1.08; letter-
    ============================================================ */
 header.nav{ position:fixed; top:0; left:0; right:0; z-index:100; transition:background .4s var(--ease), border-color .4s, box-shadow .4s; border-bottom:1px solid transparent; }
 header.nav.scrolled{ background:var(--nav-bg); backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%); border-bottom:1px solid var(--line); }
-.nav-inner{ display:flex; align-items:center; justify-content:space-between; height:68px; }
+.nav-inner{ display:flex; align-items:center; justify-content:space-between; gap:18px; height:68px; }
 .brand{ display:flex; align-items:center; gap:11px; font-family:var(--display); font-weight:600; letter-spacing:-.01em; }
 .brand .mono-badge{ width:34px; height:34px; border-radius:9px; display:grid; place-items:center; font-family:var(--mono); font-size:13px; font-weight:500; color:var(--gold); background:var(--surface); border:1px solid var(--line-2); overflow:hidden; }
 .brand small{ display:block; font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:.16em; text-transform:uppercase; font-weight:400; }
-.nav-links{ display:flex; align-items:center; gap:4px; }
+.nav-links{ display:flex; align-items:center; gap:4px; margin-left:auto; }
 .nav-links a{ font-size:14px; color:var(--ink-2); padding:8px 14px; border-radius:8px; transition:color .2s, background .2s; position:relative; }
 .nav-links a:not(.nav-cta)::after{ content:""; position:absolute; left:14px; right:14px; bottom:4px; height:1px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .3s var(--ease); }
 .nav-links a:not(.nav-cta).active::after, .nav-links a:not(.nav-cta):hover::after{ transform:scaleX(1); }
@@ -151,8 +151,6 @@ header.nav.scrolled{ background:var(--nav-bg); backdrop-filter:blur(14px) satura
 .theme-btn .sun{ opacity:0; transform:rotate(-90deg) scale(.4); }
 html[data-theme="light"] .theme-btn .moon{ opacity:0; transform:rotate(90deg) scale(.4); }
 html[data-theme="light"] .theme-btn .sun{ opacity:1; transform:rotate(0) scale(1); }
-.menu-btn{ display:none; width:42px; height:42px; border:1px solid var(--line-2); background:var(--surface); border-radius:10px; color:var(--ink); cursor:pointer; transition:background-color .3s, border-color .3s, color .3s; }
-.menu-btn svg{ width:20px; height:20px; margin:0 auto; }
 
 /* ============================================================
    HERO INTRO ANIMATION PRIMITIVES
@@ -319,6 +317,7 @@ section{ position:relative; padding:108px 0; z-index:2; }
 .project-viewport{ display:flex; gap:24px; padding:4px 64px 12px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-inline:64px; scrollbar-width:none; border-radius:18px; }
 .project-viewport::-webkit-scrollbar{ display:none; }
 .project-viewport:focus-visible{ outline:2px solid var(--gold); outline-offset:4px; }
+.project-showcase.pointer-navigation .project-viewport:focus{ outline:none; }
 .project-slide{ flex:0 0 100%; min-width:0; scroll-snap-align:center; }
 .project-preview{ display:grid; place-items:center; aspect-ratio:1890 / 912; overflow:hidden; border-radius:14px; border:1px solid var(--line-2); background:var(--bg-2); box-shadow:var(--shadow); transition:opacity .25s; }
 .project-preview img{ width:100%; height:100%; object-fit:contain; }
@@ -429,12 +428,18 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
   .skills-grid{ grid-template-columns:repeat(2,1fr); }
   .contact-grid{ grid-template-columns:1fr; gap:34px; }
 }
+@media (max-width:780px){
+  :root{ --nav-offset:132px; }
+  header.nav{ background:var(--menu-bg); backdrop-filter:blur(14px); border-bottom-color:var(--line); }
+  .nav-inner{ display:grid; grid-template-columns:minmax(0,1fr) 42px; gap:8px 12px; height:auto; padding:12px 16px 10px; }
+  .nav-inner > .theme-btn{ grid-column:2; grid-row:1; margin-left:0; }
+  .nav-links{ grid-column:1 / -1; grid-row:2; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)) minmax(70px,1.3fr); align-items:stretch; gap:4px; width:100%; margin-left:0; }
+  .nav-links a{ display:flex; align-items:center; justify-content:center; min-width:0; min-height:44px; padding:8px 2px; font-size:12px; line-height:1.3; text-align:center; }
+  .nav-links a:not(.nav-cta)::after{ left:8px; right:8px; }
+  .nav-links .nav-cta{ padding:6px 4px !important; font-size:10.5px; }
+  .hero{ padding-top:148px; }
+}
 @media (max-width:680px){
-  .nav-links{ position:fixed; top:68px; left:0; right:0; flex-direction:column; align-items:stretch; gap:4px; background:var(--menu-bg); backdrop-filter:blur(16px); padding:16px 18px 22px; border-bottom:1px solid var(--line); transform:translateY(-12px); opacity:0; pointer-events:none; transition:.3s var(--ease); }
-  .nav-links.open{ transform:none; opacity:1; pointer-events:auto; }
-  .nav-links a{ padding:13px 14px; }
-  .nav-cta{ text-align:center; }
-  .menu-btn{ display:grid; place-items:center; }
   section{ padding:80px 0; }
   .stats{ grid-template-columns:1fr 1fr; }
   .skills-grid{ grid-template-columns:1fr; }
@@ -452,7 +457,6 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
   .project-arrow{ width:34px; height:40px; margin-top:-20px; top:clamp(60px,20vw,136px); }
   .project-arrow--prev{ left:-8px; }
   .project-arrow--next{ right:-8px; }
-  .hero{ padding-top:104px; }
   .hero-status{ display:none; }
   .hero-mobile-portrait{ display:block; width:100%; height:auto; aspect-ratio:4 / 5; margin:0 0 24px; object-fit:cover; object-position:40% center; border-radius:16px; border:1px solid var(--line-2); box-shadow:var(--shadow); }
   .hero-card{ display:none; }
@@ -500,13 +504,10 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
       <a href="#skills">Skills</a>
       <a href="#journey">Journey</a>
       <a href="#contact" class="nav-cta magnetic" data-mag="0.4">Get in touch</a>
-      <button class="theme-btn magnetic" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="false" data-mag="0.35">
-        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 13.5A8.5 8.5 0 1110.5 3a7 7 0 0010.5 10.5z"/></svg>
-        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-      </button>
     </nav>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <button class="theme-btn magnetic" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="false" data-mag="0.35">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 13.5A8.5 8.5 0 1110.5 3a7 7 0 0010.5 10.5z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
     </button>
   </div>
 </header>
@@ -842,7 +843,7 @@ if(themeToggle){
 /* ===== NAV + SCROLL PROGRESS + SCROLL-SPY + TO-TOP (single scroll handler) ===== */
 (function(){
   var nav=document.getElementById('nav'), prog=document.getElementById('progress'),
-      links=document.getElementById('navLinks'), btn=document.getElementById('menuBtn'),
+      links=document.getElementById('navLinks'),
       toTop=document.getElementById('toTop');
   var navAnchors=[].slice.call(links.querySelectorAll('a:not(.nav-cta)'));
   var sections=navAnchors.map(function(a){ return document.querySelector(a.getAttribute('href')); });
@@ -852,15 +853,13 @@ if(themeToggle){
     prog.style.width=(h>0?(y/h*100):0)+'%';
     nav.classList.toggle('scrolled', y>24);
     toTop.classList.toggle('show', y>600);
-    var pos=y+window.innerHeight*0.32, active=-1;
+    var pos=y+Math.max(nav.offsetHeight+20,window.innerHeight*0.32), active=-1;
     for(var i=0;i<sections.length;i++){ if(sections[i] && sections[i].offsetTop<=pos) active=i; }
     navAnchors.forEach(function(a,i){ a.classList.toggle('active', i===active); });
     ticking=false;
   }
   window.addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
   update();
-  btn.addEventListener('click',function(){ var o=links.classList.toggle('open'); btn.setAttribute('aria-expanded',o?'true':'false'); });
-  links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ links.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }); });
   toTop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:REDUCE?'auto':'smooth'}); });
 })();
 
@@ -1114,6 +1113,10 @@ if(themeToggle){
   previous.hidden=false;
   next.hidden=false;
   root.querySelector('.project-navigation').hidden=false;
+  // Touch scrolling can leave the whole carousel focused in mobile browsers.
+  // Keep the focus ring for keyboard use, without outlining the card on taps.
+  document.addEventListener('pointerdown',function(){ root.classList.add('pointer-navigation'); },{passive:true});
+  document.addEventListener('keydown',function(){ root.classList.remove('pointer-navigation'); });
 
   function update(){
     var center=viewport.getBoundingClientRect().left+viewport.clientWidth/2;
