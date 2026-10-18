@@ -1,13 +1,14 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cedrick Rojas - </title>
+<title>Cedrick Rojas | Web Developer</title>
 <meta name="description" content="Portfolio of Cedrick Rojas, 4th-year BS Information Technology student at Mindoro State University. Full-stack web development, IoT systems, and data-driven applications including the PinyaSense smart agriculture platform." />
 <meta name="author" content="Cedrick Rojas" />
 <meta name="theme-color" content="#0A0C0A" />
-<meta property="og:title" content="Cedrick Rojas — Full-Stack & IoT Developer" />
+<link rel="icon" type="image/svg+xml" href="/picture/favicon.svg?v=3" />
+<meta property="og:title" content="Cedrick Rojas | Web Developer" />
 <meta property="og:description" content="4th-year BSIT student building full-stack web apps and IoT monitoring systems." />
 <meta property="og:type" content="website" />
 
@@ -22,6 +23,8 @@
 :root{
   --bg:#0A0C0A; --bg-2:#0E110E;
   --surface:rgba(28,34,28,0.46); --surface-2:rgba(36,44,36,0.55);
+  --nav-bg:rgba(10,12,10,.72); --menu-bg:rgba(10,12,10,.97); --input-bg:rgba(0,0,0,.25);
+  --on-gold:#0A0C0A;
   --line:rgba(242,239,230,0.09); --line-2:rgba(242,239,230,0.16);
   --gold:#EBB13E; --gold-hi:#F7C948; --sage:#84AE90; --sage-deep:#4C6B57;
   --ink:#F3F0E7; --ink-2:#C9CEC4; --muted:#8C968B; --faint:#5C655C;
@@ -34,6 +37,7 @@
   html[data-theme="light"]{
     --bg:#F6F4EE; --bg-2:#ECE8DD;
     --surface:rgba(255,255,255,0.72); --surface-2:rgba(255,255,255,0.88);
+    --nav-bg:rgba(246,244,238,.88); --menu-bg:rgba(246,244,238,.97); --input-bg:rgba(255,255,255,.80);
     --line:rgba(26,31,26,0.10); --line-2:rgba(26,31,26,0.16);
     --ink:#101410; --ink-2:#2A302A; --muted:#535B53; --faint:#717871;
     --shadow:0 24px 60px -28px rgba(30,36,30,0.18), 0 8px 24px -16px rgba(30,36,30,0.14);
@@ -52,6 +56,7 @@ body{
   background:var(--bg); color:var(--ink); font-family:var(--body);
   font-size:16px; line-height:1.6; overflow-x:hidden;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  transition:background-color .45s var(--ease), color .45s var(--ease);
 }
 /* ambient layers */
 .bg-grid{ position:fixed; inset:0; z-index:0; pointer-events:none;
@@ -69,7 +74,7 @@ body{
 
 a{ color:inherit; text-decoration:none; }
 img{ max-width:100%; display:block; }
-::selection{ background:rgba(235,177,62,0.28); color:#fff; }
+::selection{ background:rgba(235,177,62,0.28); color:var(--ink); }
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; border-radius:6px; }
 
 .wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 24px; position:relative; z-index:2; }
@@ -104,7 +109,7 @@ h1,h2,h3{ font-family:var(--display); font-weight:600; line-height:1.08; letter-
 .loader-mono{ font-family:var(--mono); font-size:13px; color:var(--muted); letter-spacing:.04em; min-height:20px; }
 .loader-mono b{ color:var(--sage); font-weight:500; animation:blink 1s steps(2) infinite; }
 @keyframes blink{ 50%{opacity:0} }
-.loader-bar{ width:min(260px,62vw); height:2px; background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden; }
+.loader-bar{ width:min(260px,62vw); height:2px; background:var(--line); border-radius:2px; overflow:hidden; }
 .loader-bar>span{ display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--sage),var(--gold)); }
 .loader-pct{ font-family:var(--mono); font-size:11px; color:var(--faint); letter-spacing:.1em; }
 
@@ -112,7 +117,7 @@ h1,h2,h3{ font-family:var(--display); font-weight:600; line-height:1.08; letter-
    NAV
    ============================================================ */
 header.nav{ position:fixed; top:0; left:0; right:0; z-index:100; transition:background .4s var(--ease), border-color .4s, box-shadow .4s; border-bottom:1px solid transparent; }
-header.nav.scrolled{ background:rgba(10,12,10,.72); backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%); border-bottom:1px solid var(--line); }
+header.nav.scrolled{ background:var(--nav-bg); backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%); border-bottom:1px solid var(--line); }
 .nav-inner{ display:flex; align-items:center; justify-content:space-between; height:68px; }
 .brand{ display:flex; align-items:center; gap:11px; font-family:var(--display); font-weight:600; letter-spacing:-.01em; }
 .brand .mono-badge{ width:34px; height:34px; border-radius:9px; display:grid; place-items:center; font-family:var(--mono); font-size:13px; font-weight:500; color:var(--gold); background:var(--surface); border:1px solid var(--line-2); overflow:hidden; }
@@ -123,15 +128,17 @@ header.nav.scrolled{ background:rgba(10,12,10,.72); backdrop-filter:blur(14px) s
 .nav-links a:not(.nav-cta).active::after, .nav-links a:not(.nav-cta):hover::after{ transform:scaleX(1); }
 .nav-links a:not(.nav-cta).active{ color:var(--ink); }
 .nav-links a:hover{ color:var(--ink); }
-.nav-cta{ font-family:var(--mono); font-size:13px; padding:9px 16px !important; color:var(--bg) !important; background:var(--gold); border-radius:9px; font-weight:500; transition:transform .2s var(--ease), box-shadow .2s, background .2s !important; }
+.nav-cta{ font-family:var(--mono); font-size:13px; padding:9px 16px !important; color:var(--on-gold) !important; background:var(--gold); border-radius:9px; font-weight:500; transition:transform .2s var(--ease), box-shadow .2s, background .2s !important; }
 .nav-cta:hover{ transform:translateY(-1px); background:var(--gold-hi) !important; box-shadow:var(--glow-gold); }
-.theme-btn{ display:inline-flex; align-items:center; gap:8px; margin-left:8px; padding:9px 14px; border-radius:9px; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); font-family:var(--mono); font-size:12px; letter-spacing:.04em; cursor:pointer; transition:transform .2s var(--ease), border-color .2s, box-shadow .2s, background .2s; backdrop-filter:blur(6px); }
+.theme-btn{ position:relative; display:inline-grid; place-items:center; flex-shrink:0; align-self:center; width:42px; height:42px; margin-left:8px; padding:0; border-radius:50%; border:1px solid var(--line-2); background:var(--surface); color:var(--ink); cursor:pointer; overflow:hidden; transition:transform .2s var(--ease), border-color .45s, box-shadow .2s, background-color .45s, color .45s; backdrop-filter:blur(6px); }
 .theme-btn:hover{ transform:translateY(-1px); border-color:var(--gold); box-shadow:var(--shadow); }
-.theme-btn svg{ width:16px; height:16px; }
-.theme-btn .sun{ display:none; }
-html[data-theme="light"] .theme-btn .moon{ display:none; }
-html[data-theme="light"] .theme-btn .sun{ display:block; }
-.menu-btn{ display:none; width:42px; height:42px; border:1px solid var(--line-2); background:var(--surface); border-radius:10px; color:var(--ink); cursor:pointer; }
+.theme-btn:active{ transform:scale(.92); }
+.theme-btn svg{ grid-area:1 / 1; width:20px; height:20px; transform-origin:center; transition:transform .5s var(--ease-out), opacity .3s var(--ease); }
+.theme-btn .moon{ opacity:1; transform:rotate(0) scale(1); }
+.theme-btn .sun{ opacity:0; transform:rotate(-90deg) scale(.4); }
+html[data-theme="light"] .theme-btn .moon{ opacity:0; transform:rotate(90deg) scale(.4); }
+html[data-theme="light"] .theme-btn .sun{ opacity:1; transform:rotate(0) scale(1); }
+.menu-btn{ display:none; width:42px; height:42px; border:1px solid var(--line-2); background:var(--surface); border-radius:10px; color:var(--ink); cursor:pointer; transition:background-color .3s, border-color .3s, color .3s; }
 .menu-btn svg{ width:20px; height:20px; margin:0 auto; }
 
 /* ============================================================
@@ -151,6 +158,7 @@ html[data-theme="light"] .theme-btn .sun{ display:block; }
 .hero::after{ content:""; position:absolute; inset:0; z-index:1; pointer-events:none; background:radial-gradient(120% 100% at 72% 30%, transparent 38%, rgba(10,12,10,.55) 100%); }
 .hero .wrap{ display:grid; grid-template-columns:1.25fr .85fr; gap:56px; align-items:center; }
 .hero-status{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:26px; }
+.hero-mobile-portrait{ display:none; }
 .status-chip{ font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; color:var(--ink-2); display:inline-flex; align-items:center; gap:8px; padding:7px 13px; border-radius:99px; background:var(--surface); border:1px solid var(--line); backdrop-filter:blur(6px); }
 .dot{ width:7px; height:7px; border-radius:50%; background:var(--sage); box-shadow:0 0 0 0 rgba(132,174,144,.6); animation:pulse 2.4s infinite var(--ease); }
 @keyframes pulse{ 0%{box-shadow:0 0 0 0 rgba(132,174,144,.5)} 70%{box-shadow:0 0 0 7px rgba(132,174,144,0)} 100%{box-shadow:0 0 0 0 rgba(132,174,144,0)} }
@@ -164,10 +172,10 @@ html[data-theme="light"] .theme-btn .sun{ display:block; }
 .btn-row{ display:flex; gap:13px; flex-wrap:wrap; margin-bottom:32px; }
 .btn{ display:inline-flex; align-items:center; gap:9px; cursor:pointer; font-size:14.5px; font-weight:500; padding:13px 22px; border-radius:11px; border:1px solid transparent; transition:transform .25s var(--ease), box-shadow .25s, background .25s, border-color .25s, color .2s; font-family:var(--body); will-change:transform; }
 .btn svg{ width:17px; height:17px; }
-.btn-primary{ background:var(--gold); color:var(--bg); }
+.btn-primary{ background:var(--gold); color:var(--on-gold); }
 .btn-primary:hover{ background:var(--gold-hi); box-shadow:var(--glow-gold); }
 .btn-ghost{ background:var(--surface); color:var(--ink); border-color:var(--line-2); backdrop-filter:blur(6px); }
-.btn-ghost:hover{ border-color:var(--sage); color:#fff; box-shadow:var(--shadow); }
+.btn-ghost:hover{ border-color:var(--sage); color:var(--ink); box-shadow:var(--shadow); }
 .btn-line{ background:transparent; color:var(--ink-2); border-color:var(--line-2); }
 .btn-line:hover{ color:var(--ink); border-color:var(--ink-2); }
 .socials{ display:flex; gap:12px; }
@@ -245,22 +253,16 @@ section{ position:relative; padding:108px 0; z-index:2; }
 /* ============================================================
    ABOUT
    ============================================================ */
-.about-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:40px; align-items:start; }
-.about-lead{ font-size:1.18rem; color:var(--ink); line-height:1.7; margin-bottom:22px; font-family:var(--display); font-weight:400; letter-spacing:-.01em; }
-.about-body{ color:var(--ink-2); margin-bottom:30px; }
-.pillars{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.about-grid{ display:grid; grid-template-columns:1fr; }
+.about-lead{ max-width:75ch; font-size:1.18rem; color:var(--ink); line-height:1.7; margin-bottom:22px; font-family:var(--display); font-weight:400; letter-spacing:-.01em; }
+.about-body{ max-width:80ch; color:var(--ink-2); margin-bottom:30px; }
+.pillars{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
 .pillar{ padding:20px; border-radius:14px; background:var(--surface); border:1px solid var(--line); transition:transform .25s var(--ease), border-color .25s, box-shadow .25s; }
 .pillar:hover{ transform:translateY(-4px); border-color:var(--line-2); box-shadow:var(--shadow); }
 .pillar .pi{ width:38px; height:38px; border-radius:10px; display:grid; place-items:center; background:rgba(235,177,62,.1); color:var(--gold); margin-bottom:13px; }
 .pillar .pi svg{ width:19px; height:19px; }
 .pillar h4{ font-family:var(--display); font-size:1rem; font-weight:600; margin-bottom:6px; }
 .pillar p{ font-size:.9rem; color:var(--muted); line-height:1.55; }
-.spec{ border-radius:18px; padding:26px; background:linear-gradient(160deg,var(--surface-2),var(--surface)); border:1px solid var(--line-2); box-shadow:var(--shadow); backdrop-filter:blur(12px); position:sticky; top:96px; }
-.spec h5{ font-family:var(--mono); font-size:11px; letter-spacing:.22em; color:var(--gold); text-transform:uppercase; margin-bottom:18px; display:flex; align-items:center; gap:9px; }
-.spec-row{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:13px 0; border-top:1px solid var(--line); }
-.spec-row:first-of-type{ border-top:none; }
-.spec-row .k{ font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; }
-.spec-row .v{ font-size:.92rem; color:var(--ink); text-align:right; font-weight:500; }
 
 /* ============================================================
    SKILLS
@@ -296,55 +298,39 @@ section{ position:relative; padding:108px 0; z-index:2; }
 /* ============================================================
    PROJECTS
    ============================================================ */
-.feature{ display:grid; grid-template-columns:1.05fr 1fr; border-radius:22px; overflow:hidden; border:1px solid var(--line-2); background:linear-gradient(160deg,var(--surface-2),var(--surface)); box-shadow:var(--shadow); backdrop-filter:blur(12px); margin-bottom:26px; }
-.feature-visual{ position:relative; min-height:400px; background:linear-gradient(160deg,#11150f,#0c0f0c); border-right:1px solid var(--line-2); overflow:hidden; }
-.feature-meta{ padding:38px; }
-.feature-badge{ display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); background:rgba(235,177,62,.1); padding:6px 12px; border-radius:99px; margin-bottom:18px; }
-.feature h3{ font-size:1.7rem; margin-bottom:8px; }
-.feature .sub{ font-family:var(--mono); font-size:12.5px; color:var(--sage); letter-spacing:.04em; margin-bottom:18px; }
-.feature p.desc{ color:var(--ink-2); margin-bottom:22px; }
-.feat-list{ display:grid; gap:10px; margin-bottom:24px; }
-.feat-list li{ list-style:none; display:flex; align-items:flex-start; gap:11px; font-size:.92rem; color:var(--ink-2); }
-.feat-list svg{ width:17px; height:17px; color:var(--sage); flex:none; margin-top:3px; }
-.proj-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:24px; }
 .proj-link{ display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px; color:var(--gold); white-space:nowrap; transition:gap .2s; }
 .proj-link svg{ width:16px; height:16px; flex:none; }
 .proj-link:hover{ gap:13px; }
 
-/* live dashboard mock */
-.mock{ position:absolute; inset:26px; display:flex; flex-direction:column; gap:12px; }
-.mock-bar{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; color:var(--muted); }
-.mock-bar .live{ margin-left:auto; color:var(--sage); display:flex; align-items:center; gap:6px; }
-.mock-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-.mstat{ background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:11px; padding:13px; }
-.mstat .ml{ font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
-.mstat .mv{ font-family:var(--display); font-size:1.5rem; font-weight:600; color:var(--ink); margin-top:4px; font-variant-numeric:tabular-nums; }
-.mstat .mv.gold{ color:var(--gold); } .mstat .mv.sage{ color:var(--sage); }
-.mock-graph{ flex:1; min-height:130px; background:rgba(255,255,255,.02); border:1px solid var(--line); border-radius:11px; padding:14px; overflow:hidden; }
-.mock-graph svg{ width:100%; height:100%; }
-.mock-graph .gl{ font-family:var(--mono); font-size:10px; fill:var(--muted); }
-.draw{ stroke-dasharray:1; stroke-dashoffset:1; }
-.feature.in .draw{ animation:draw 2.2s var(--ease-out) forwards .3s; }
-@keyframes draw{ to{ stroke-dashoffset:0; } }
-
-.proj-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.pcard{ border-radius:18px; overflow:hidden; border:1px solid var(--line); background:var(--surface); transition:border-color .3s, box-shadow .3s; display:flex; flex-direction:column; transform-style:preserve-3d; will-change:transform; position:relative; }
-.pcard .glare{ position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s; z-index:3; background:radial-gradient(200px 200px at var(--mx,50%) var(--my,50%), rgba(255,255,255,.06), transparent 60%); }
-.pcard:hover .glare{ opacity:1; }
-.pcard:hover{ border-color:var(--line-2); box-shadow:var(--shadow); }
-.pcard-top{ height:158px; position:relative; overflow:hidden; display:grid; place-items:center; border-bottom:1px solid var(--line); }
-.pcard-top .art{ width:100%; height:100%; transition:transform .5s var(--ease-out); }
-.pcard-top img.art{ display:block; object-fit:cover; object-position:center 45%; }
-.pcard-top--logo{ background:#fff; }
-.pcard-top--gora{ background:#101113; }
-.pcard-top--recipe{ background:#fffdf9; }
-.pcard-top img.art--logo{ object-fit:contain; object-position:center; padding:12px; box-sizing:border-box; }
-.pcard-top img.art--gora{ padding:24px 36px; }
-.pcard:hover .pcard-top .art{ transform:scale(1.05); }
-.pcard-body{ padding:22px; display:flex; flex-direction:column; flex:1; }
+.project-showcase{ position:relative; }
+.project-viewport{ display:flex; gap:24px; padding:4px 64px 12px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-inline:64px; scrollbar-width:none; border-radius:18px; }
+.project-viewport::-webkit-scrollbar{ display:none; }
+.project-viewport:focus-visible{ outline:2px solid var(--gold); outline-offset:4px; }
+.project-slide{ flex:0 0 100%; min-width:0; scroll-snap-align:center; }
+.project-preview{ display:grid; place-items:center; aspect-ratio:1890 / 912; overflow:hidden; border-radius:14px; border:1px solid var(--line-2); background:var(--bg-2); box-shadow:var(--shadow); transition:opacity .25s; }
+.project-preview img{ width:100%; height:100%; object-fit:contain; }
+.project-preview--pinyasense{ background:#111b30; }
+.project-preview--gora{ background:#101113; }
+.project-preview--recipe{ background:#081520; }
+.project-caption{ padding:24px 0 0; transition:opacity .2s; }
+.project-showcase.is-ready .project-slide:not(.is-active) .project-preview{ opacity:.45; }
+.project-showcase.is-ready .project-slide:not(.is-active) .project-caption{ opacity:0; visibility:hidden; }
+.project-caption-head{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.project-caption h3{ font-size:clamp(1.35rem,2.5vw,1.9rem); }
+.project-caption p{ max-width:65ch; margin:12px 0 16px; color:var(--muted); font-size:.92rem; line-height:1.65; }
+.project-arrow{ position:absolute; top:clamp(90px,18vw,238px); z-index:4; display:grid; place-items:center; width:44px; height:52px; margin-top:-26px; border:1px solid var(--line-2); border-radius:10px; background:var(--bg-2); color:var(--ink-2); cursor:pointer; transition:color .2s,border-color .2s,background .2s; }
+.project-arrow:hover{ color:var(--gold); border-color:var(--gold); background:var(--surface-2); }
+.project-arrow svg{ width:20px; height:20px; }
+.project-arrow--prev{ left:0; }
+.project-arrow--next{ right:0; }
+.project-navigation{ display:flex; justify-content:center; align-items:center; gap:22px; padding-top:20px; }
+.project-navigation[hidden],.project-arrow[hidden]{ display:none; }
+.project-dots{ display:flex; gap:2px; }
+.project-dot{ display:grid; place-items:center; width:36px; height:36px; padding:0; border:0; background:transparent; cursor:pointer; }
+.project-dot span{ display:block; width:6px; height:6px; border-radius:9px; background:var(--faint); transition:width .25s,background .25s; }
+.project-dot[aria-current="true"] span{ width:22px; background:var(--gold); }
+.project-count{ font-family:var(--mono); color:var(--muted); font-size:11px; letter-spacing:.12em; font-variant-numeric:tabular-nums; }
 .ptag{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--sage); margin-bottom:9px; }
-.pcard h4{ font-family:var(--display); font-size:1.12rem; font-weight:600; margin-bottom:8px; }
-.pcard p{ font-size:.88rem; color:var(--muted); line-height:1.55; margin-bottom:16px; flex:1; }
 .mini-tags{ display:flex; flex-wrap:wrap; gap:6px; }
 .mini-tags span{ font-family:var(--mono); font-size:10.5px; color:var(--ink-2); padding:4px 9px; border-radius:7px; background:rgba(255,255,255,.03); border:1px solid var(--line); }
 .tpl-note{ font-family:var(--mono); font-size:11px; color:var(--faint); margin-top:22px; text-align:center; letter-spacing:.04em; }
@@ -365,7 +351,7 @@ section{ position:relative; padding:108px 0; z-index:2; }
 .form-card{ padding:30px; border-radius:20px; background:linear-gradient(160deg,var(--surface-2),var(--surface)); border:1px solid var(--line-2); box-shadow:var(--shadow); backdrop-filter:blur(12px); }
 .field{ margin-bottom:18px; }
 .field label{ display:block; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-.field input,.field textarea{ width:100%; background:rgba(0,0,0,.25); border:1px solid var(--line-2); border-radius:11px; padding:13px 15px; color:var(--ink); font-family:var(--body); font-size:.95rem; transition:border-color .2s, box-shadow .2s; }
+.field input,.field textarea{ width:100%; background:var(--input-bg); border:1px solid var(--line-2); border-radius:11px; padding:13px 15px; color:var(--ink); font-family:var(--body); font-size:.95rem; transition:background-color .3s, color .3s, border-color .2s, box-shadow .2s; }
 .field input::placeholder,.field textarea::placeholder{ color:var(--faint); }
 .field input:focus,.field textarea:focus{ outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(235,177,62,.12); }
 .field textarea{ resize:vertical; min-height:120px; }
@@ -374,7 +360,6 @@ section{ position:relative; padding:108px 0; z-index:2; }
 .form-msg{ margin-top:14px; font-family:var(--mono); font-size:12.5px; color:var(--sage); display:none; align-items:center; gap:9px; }
 .form-msg.show{ display:flex; }
 .form-msg svg{ width:16px; height:16px; flex:none; }
-.form-hint{ margin-top:14px; font-family:var(--mono); font-size:11px; color:var(--faint); line-height:1.5; }
 
 /* footer + back-to-top */
 footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-index:2; }
@@ -383,7 +368,7 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
 .foot-soc{ display:flex; gap:18px; }
 .foot-soc a{ color:var(--muted); transition:color .2s; font-size:13px; }
 .foot-soc a:hover{ color:var(--gold); }
-#toTop{ position:fixed; right:24px; bottom:24px; z-index:120; width:46px; height:46px; border-radius:12px; display:grid; place-items:center; background:var(--gold); color:var(--bg); border:none; cursor:pointer; opacity:0; transform:translateY(14px) scale(.9); pointer-events:none; transition:opacity .3s, transform .3s var(--ease), box-shadow .25s; box-shadow:var(--shadow); }
+#toTop{ position:fixed; right:24px; bottom:24px; z-index:120; width:46px; height:46px; border-radius:12px; display:grid; place-items:center; background:var(--gold); color:var(--on-gold); border:none; cursor:pointer; opacity:0; transform:translateY(14px) scale(.9); pointer-events:none; transition:opacity .3s, transform .3s var(--ease), box-shadow .25s; box-shadow:var(--shadow); }
 #toTop.show{ opacity:1; transform:none; pointer-events:auto; }
 #toTop:hover{ box-shadow:var(--glow-gold); }
 #toTop svg{ width:20px; height:20px; }
@@ -397,25 +382,32 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
   .stats{ grid-template-columns:repeat(2,1fr); }
   .stat:nth-child(3){ border-left:none; }
   .stat:nth-child(3),.stat:nth-child(4){ border-top:1px solid var(--line); }
-  .about-grid{ grid-template-columns:1fr; }
-  .spec{ position:static; }
+  .pillars{ grid-template-columns:repeat(2,1fr); }
   .skills-grid{ grid-template-columns:repeat(2,1fr); }
-  .feature{ grid-template-columns:1fr; }
-  .feature-visual{ min-height:320px; border-right:none; border-bottom:1px solid var(--line-2); }
-  .proj-grid{ grid-template-columns:repeat(2,1fr); }
   .contact-grid{ grid-template-columns:1fr; gap:34px; }
 }
 @media (max-width:680px){
-  .nav-links{ position:fixed; top:68px; left:0; right:0; flex-direction:column; align-items:stretch; gap:4px; background:rgba(10,12,10,.97); backdrop-filter:blur(16px); padding:16px 18px 22px; border-bottom:1px solid var(--line); transform:translateY(-12px); opacity:0; pointer-events:none; transition:.3s var(--ease); }
+  .nav-links{ position:fixed; top:68px; left:0; right:0; flex-direction:column; align-items:stretch; gap:4px; background:var(--menu-bg); backdrop-filter:blur(16px); padding:16px 18px 22px; border-bottom:1px solid var(--line); transform:translateY(-12px); opacity:0; pointer-events:none; transition:.3s var(--ease); }
   .nav-links.open{ transform:none; opacity:1; pointer-events:auto; }
   .nav-links a{ padding:13px 14px; }
   .nav-cta{ text-align:center; }
   .menu-btn{ display:grid; place-items:center; }
   section{ padding:80px 0; }
   .stats{ grid-template-columns:1fr 1fr; }
-  .skills-grid,.pillars,.proj-grid{ grid-template-columns:1fr; }
-  .feature-meta{ padding:28px; }
+  .skills-grid{ grid-template-columns:1fr; }
+  .pillars{ grid-template-columns:repeat(2,minmax(0,1fr)); grid-auto-flow:row; grid-auto-columns:auto; overflow:visible; padding:0; }
+  .project-viewport{ gap:14px; padding-inline:16px; scroll-padding-inline:16px; }
+  .project-preview{ border-radius:10px; }
+  .project-caption{ padding-top:18px; }
+  .project-caption-head{ align-items:flex-start; flex-direction:column; gap:12px; }
+  .project-caption p{ font-size:.88rem; }
+  .project-arrow{ width:34px; height:40px; margin-top:-20px; top:clamp(60px,20vw,136px); }
+  .project-arrow--prev{ left:-8px; }
+  .project-arrow--next{ right:-8px; }
   .hero{ padding-top:104px; }
+  .hero-status{ display:none; }
+  .hero-mobile-portrait{ display:block; width:100%; height:auto; aspect-ratio:4 / 5; margin:0 0 24px; object-fit:cover; object-position:40% center; border-radius:16px; border:1px solid var(--line-2); box-shadow:var(--shadow); }
+  .hero-card{ display:none; }
   #cur-dot,#cur-ring,#glow{ display:none; }
 }
 @media (pointer:fine) and (prefers-reduced-motion:no-preference){ body{ cursor:none; } a,button,.tag,input,textarea{ cursor:none; } .field input,.field textarea{ cursor:text; } }
@@ -424,7 +416,6 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
   *{ animation:none !important; scroll-behavior:auto !important; transition-duration:.001ms !important; }
   .reveal,.stagger>*,.hi,.line-i{ opacity:1 !important; transform:none !important; }
   #hero-canvas,.bg-aurora,.portrait .sweep,#cur-dot,#cur-ring,#glow,.scroll-cue{ display:none !important; }
-  .draw{ stroke-dashoffset:0 !important; }
 }
 </style>
 </head>
@@ -455,15 +446,14 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
       <span>Cedrick Rojas<small>BSIT · Developer</small></span>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
-      <a href="#projects">Projects</a>
       <a href="#about">About</a>
+      <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#journey">Journey</a>
       <a href="#contact" class="nav-cta magnetic" data-mag="0.4">Get in touch</a>
       <button class="theme-btn magnetic" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="false" data-mag="0.35">
-        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 13.5A8.5 8.5 0 1110.5 3a7 7 0 0010.5 10.5z"/></svg>
-        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        <span>Light</span>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 13.5A8.5 8.5 0 1110.5 3a7 7 0 0010.5 10.5z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       </button>
     </nav>
     <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
@@ -483,6 +473,7 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
         <span class="status-chip"><span class="dot"></span> <span class="scramble" data-text="Open to internships">Open to internships</span></span>
         <span class="status-chip"><span class="scramble" data-text="Mindoro, Philippines">Mindoro, Philippines</span></span>
       </div>
+      <img class="hero-mobile-portrait" src="picture/legitnaprofile.jpg" alt="Cedrick Rojas" width="72" height="72" />
       <h1>
         <span class="line"><span class="line-i hi">Cedrick Rojas</span></span>
         <span class="line"><span class="line-i hi grad">Builds for the field.</span></span>
@@ -509,9 +500,6 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
         </a>
       </div>
       <div class="socials hi" aria-label="Social links">
-        <a href="https://github.com/cedrickrojas" target="_blank" rel="noopener" aria-label="GitHub" class="magnetic" data-mag="0.5">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 00-.9-2.7c3-.3 6.2-1.5 6.2-6.9a5.4 5.4 0 00-1.5-3.7 5 5 0 00-.1-3.7s-1.2-.4-3.9 1.4a13.4 13.4 0 00-7 0C5.1.7 3.9 1.1 3.9 1.1a5 5 0 00-.1 3.7 5.4 5.4 0 00-1.5 3.7c0 5.4 3.2 6.6 6.2 6.9a3.4 3.4 0 00-.9 2.7V22"/></svg>
-        </a>
         <a href="mailto:rojascedrick543@gmail.com" aria-label="Email" class="magnetic" data-mag="0.5">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5l9 6 9-6"/></svg>
         </a>
@@ -542,73 +530,11 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
   <div class="scroll-cue" aria-hidden="true"><span>scroll</span><span class="ln"></span></div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-index scramble" data-text="01 / PROJECTS">01 / PROJECTS</span>
-      <h2>Selected work.</h2>
-      <p>From sensor networks in the field to full-stack platforms in the browser.</p>
-    </div>
-
-    <article class="feature reveal">
-      <div class="feature-visual">
-        <div class="mock">
-          <div class="mock-bar">PinyaSense · field node #03 <span class="live"><span class="dot"></span> live</span></div>
-          <div class="mock-stats">
-            <div class="mstat"><div class="ml">Soil moisture</div><div class="mv sage"><span id="m-soil">62</span>%</div></div>
-            <div class="mstat"><div class="ml">Temp °C</div><div class="mv gold"><span id="m-temp">29.4</span></div></div>
-            <div class="mstat"><div class="ml">Health</div><div class="mv">A+</div></div>
-          </div>
-          <div class="mock-graph">
-            <svg viewBox="0 0 320 130" preserveAspectRatio="none" aria-hidden="true">
-              <defs><linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(235,177,62,0.35)"/><stop offset="100%" stop-color="rgba(235,177,62,0)"/></linearGradient></defs>
-              <text class="gl" x="6" y="14">growth forecast →</text>
-              <path d="M0,110 L0,86 C30,80 50,64 80,66 C115,68 135,40 170,42 C205,44 235,24 270,22 C295,21 310,18 320,16 L320,130 L0,130 Z" fill="url(#gfill)"/>
-              <path class="draw" pathLength="1" d="M0,86 C30,80 50,64 80,66 C115,68 135,40 170,42 C205,44 235,24 270,22 C295,21 310,18 320,16" fill="none" stroke="#EBB13E" stroke-width="2"/>
-              <path class="draw" pathLength="1" d="M0,104 C40,100 70,96 110,94 C150,92 190,86 230,86 C270,86 300,84 320,84" fill="none" stroke="#84AE90" stroke-width="1.6" stroke-dasharray="4 4"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div class="feature-meta">
-        <span class="feature-badge"><span class="dot"></span> Flagship · IoT + AI</span>
-        <h3>PinyaSense</h3>
-        <p class="sub">Smart IoT &amp; AI Monitoring System for Pineapple Agriculture</p>
-        <p class="desc">A smart agriculture platform that combines IoT sensors, machine learning, and web technologies to monitor pineapple health, detect diseases, forecast growth stages, and predict optimal harvest time.</p>
-        <ul class="feat-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 6"/></svg> AI-powered disease detection</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 6"/></svg> Real-time sensor monitoring</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 6"/></svg> Growth-stage prediction &amp; harvest forecasting</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 6"/></svg> Web-based monitoring dashboard</li>
-        </ul>
-        <div class="proj-tags"><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">Arduino</span><span class="tag">Machine Learning</span><span class="tag">IoT Sensors</span><span class="tag">React</span></div>
-        <a href="#contact" class="proj-link" data-project="PinyaSense">Ask me about this build <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-    </article>
-
-    <div class="proj-grid stagger">
-      <a class="pcard tilt" href="https://sulyap-calapan.vercel.app/" target="_blank" rel="noopener"><div class="glare"></div>
-        <div class="pcard-top pcard-top--logo"><img class="art art--logo" src="picture/sulyap-logo.svg" alt="Sulyap Calapan logo" width="995" height="1060" loading="lazy" decoding="async" /></div>
-        <div class="pcard-body"><div class="ptag">Web · Local Project</div><h4>Sulyap Calapan</h4><p>A web project for Calapan City, hosted on Vercel. Visit the live site to explore Sulyap Calapan.</p><div class="mini-tags"><span>Web</span><span>Vercel</span></div><span class="proj-link" style="margin-top:16px">Visit live site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a>
-      <a class="pcard tilt" href="https://gorav2.vercel.app/" target="_blank" rel="noopener"><div class="glare"></div>
-        <div class="pcard-top pcard-top--gora"><img class="art art--logo art--gora" src="picture/gora-logo.svg" alt="GORA logo" loading="lazy" decoding="async" /></div>
-        <div class="pcard-body"><div class="ptag">Web · Sports Community</div><h4>GORA</h4><p>A sports community platform to discover nearby games, connect with players, and join local sports clubs.</p><div class="mini-tags"><span>Vue</span><span>Ionic</span><span>Vercel</span></div><span class="proj-link" style="margin-top:16px">Visit live site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a>
-      <a class="pcard tilt" href="https://my-recipe-collection.vercel.app/" target="_blank" rel="noopener"><div class="glare"></div>
-        <div class="pcard-top pcard-top--recipe"><img class="art" src="picture/my-recipe-collection-pasta.jpg" alt="Basil pesto pasta with cherry tomatoes from My Recipe Collection" width="850" height="567" loading="lazy" decoding="async" /></div>
-        <div class="pcard-body"><div class="ptag">Web · Recipe Organizer</div><h4>My Recipe Collection</h4><p>A modern recipe collection app built with Ionic, Angular, and Firebase, allowing users to securely create, manage, search, and organize their favorite recipes.</p><div class="mini-tags"><span>Angular</span><span>Ionic</span><span>Firebase</span></div><span class="proj-link" style="margin-top:16px">Visit live site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a>
-    </div>
-  </div>
-</section>
-
 <!-- MARQUEE -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>React</span><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>MySQL</span><span>Tailwind</span><span>Python</span><span>Java</span><span>C#</span><span>Arduino</span><span>IoT</span><span>Machine Learning</span><span>REST APIs</span><span>Git</span>
-    <span>React</span><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>MySQL</span><span>Tailwind</span><span>Python</span><span>Java</span><span>C#</span><span>Arduino</span><span>IoT</span><span>Machine Learning</span><span>REST APIs</span><span>Git</span>
+    <span>React</span><span>Vue.js</span><span>Angular</span><span>Ionic</span><span>Firebase</span><span>Vercel</span><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>MySQL</span><span>Tailwind</span><span>Python</span><span>Java</span><span>C#</span><span>Arduino</span><span>IoT</span><span>Machine Learning</span><span>REST APIs</span><span>Git</span>
+    <span>React</span><span>Vue.js</span><span>Angular</span><span>Ionic</span><span>Firebase</span><span>Vercel</span><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>MySQL</span><span>Tailwind</span><span>Python</span><span>Java</span><span>C#</span><span>Arduino</span><span>IoT</span><span>Machine Learning</span><span>REST APIs</span><span>Git</span>
   </div>
 </div>
 
@@ -617,7 +543,7 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
   <div class="wrap">
     <div class="stats reveal">
       <div class="stat"><div class="num"><span class="count" data-to="4">0</span><span class="suf">th</span></div><div class="lbl">Year · BSIT</div></div>
-      <div class="stat"><div class="num"><span class="count" data-to="22">0</span><span class="suf">+</span></div><div class="lbl">Technologies &amp; tools</div></div>
+      <div class="stat"><div class="num"><span class="count" data-to="28">0</span><span class="suf">+</span></div><div class="lbl">Technologies &amp; tools</div></div>
       <div class="stat"><div class="num"><span class="count" data-to="6">0</span></div><div class="lbl">Core skill domains</div></div>
       <div class="stat"><div class="num"><span class="count" data-to="1">0</span></div><div class="lbl">Flagship IoT + AI build</div></div>
     </div>
@@ -628,7 +554,7 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
 <section id="about">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-index scramble" data-text="02 / ABOUT">02 / ABOUT</span>
+      <span class="sec-index scramble" data-text="01 / ABOUT">01 / ABOUT</span>
       <h2>Hardware, software, and the space between.</h2>
       <p>A developer who's just as comfortable wiring a sensor as shipping a web app.</p>
     </div>
@@ -643,15 +569,77 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
           <div class="pillar"><div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>Professional Values</h4><p>Curiosity, reliability, clean and maintainable code, and a user-centered approach to every build.</p></div>
         </div>
       </div>
-      <div class="spec reveal" aria-label="Profile summary">
-        <h5><span class="dot"></span> Profile</h5>
-        <div class="spec-row"><span class="k">Name</span><span class="v">Cedrick Rojas</span></div>
-        <div class="spec-row"><span class="k">Program</span><span class="v">BS Information Technology</span></div>
-        <div class="spec-row"><span class="k">Year</span><span class="v">4th Year</span></div>
-        <div class="spec-row"><span class="k">University</span><span class="v">Mindoro State University</span></div>
-        <div class="spec-row"><span class="k">Location</span><span class="v">Mindoro, Philippines</span></div>
-        <div class="spec-row"><span class="k">Focus</span><span class="v">Full-Stack · IoT · Data</span></div>
-        <div class="spec-row"><span class="k">Status</span><span class="v">Open to internships</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-index scramble" data-text="02 / PROJECTS">02 / PROJECTS</span>
+      <h2>Selected work.</h2>
+      <p>From sensor networks in the field to full-stack platforms in the browser.</p>
+    </div>
+
+    <div class="project-showcase reveal" role="region" aria-roledescription="carousel" aria-label="Featured projects">
+      <div class="project-viewport" id="projectViewport" tabindex="0" aria-label="Project previews. Use the left and right arrow keys to browse.">
+        <article class="project-slide" role="group" aria-roledescription="slide" aria-label="1 of 4: PinyaSense">
+          <a class="project-preview project-preview--pinyasense" href="#contact" data-project="PinyaSense" aria-label="Ask about PinyaSense">
+            <img src="picture/pinyasense-screenshot.png" alt="PinyaSense homepage with Smart Pineapple Disease Detection System messaging and green Get Started and Learn More buttons" width="1578" height="766" loading="lazy" decoding="async" />
+          </a>
+          <div class="project-caption">
+            <div class="ptag">Flagship · IoT + AI</div>
+            <div class="project-caption-head"><h3>PinyaSense</h3><a href="#contact" class="proj-link" data-project="PinyaSense">Ask me about this build <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            <p>An IoT and AI platform for pineapple disease detection, real-time sensor monitoring, and growth and harvest forecasting.</p>
+            <div class="mini-tags"><span>Node.js</span><span>MongoDB</span><span>Arduino</span><span>Machine Learning</span><span>IoT Sensors</span><span>React</span></div>
+          </div>
+        </article>
+        <article class="project-slide" role="group" aria-roledescription="slide" aria-label="2 of 4: Sulyap Calapan">
+          <a class="project-preview" href="https://sulyap-calapan.vercel.app/" target="_blank" rel="noopener" aria-label="Visit Sulyap Calapan live site">
+            <img src="picture/sulyap-calapan-screenshot.png" alt="Sulyap Calapan homepage featuring Baco Islands, Sto. Niño Cathedral, Silonay Mangroves, and other local destinations" width="1890" height="906" loading="lazy" decoding="async" />
+          </a>
+          <div class="project-caption">
+            <div class="ptag">Web · Tourism Guide</div>
+            <div class="project-caption-head"><h3>Sulyap Calapan</h3><a class="proj-link" href="https://sulyap-calapan.vercel.app/" target="_blank" rel="noopener">Visit live site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            <p>A digital tourism guide to discover Calapan destinations, local establishments, and cultural experiences.</p>
+            <div class="mini-tags"><span>Web</span><span>Vercel</span></div>
+          </div>
+        </article>
+        <article class="project-slide" role="group" aria-roledescription="slide" aria-label="3 of 4: GORA">
+          <a class="project-preview project-preview--gora" href="https://gorav2.vercel.app/" target="_blank" rel="noopener" aria-label="Visit GORA live site">
+            <img src="picture/gora-screenshot.png" alt="GORA homepage with a basketball hoop, Find Your Game messaging, and links to discover games and communities" width="1896" height="907" loading="lazy" decoding="async" />
+          </a>
+          <div class="project-caption">
+            <div class="ptag">Web · Sports Community</div>
+            <div class="project-caption-head"><h3>GORA</h3><a class="proj-link" href="https://gorav2.vercel.app/" target="_blank" rel="noopener">Visit live site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            <p>A sports community platform to discover nearby games, connect with players, and join local sports clubs.</p>
+            <div class="mini-tags"><span>Vue</span><span>Ionic</span><span>Vercel</span></div>
+          </div>
+        </article>
+        <article class="project-slide" role="group" aria-roledescription="slide" aria-label="4 of 4: My Recipe Collection">
+          <a class="project-preview project-preview--recipe" href="https://my-recipe-collection.vercel.app/" target="_blank" rel="noopener" aria-label="Visit My Recipe Collection live site">
+            <img src="picture/my-recipe-collection-screenshot.png" alt="My Recipe Collection homepage with Good food, Less guesswork messaging, a pasta preview, and sign-up and login links" width="1895" height="902" loading="lazy" decoding="async" />
+          </a>
+          <div class="project-caption">
+            <div class="ptag">Web · Recipe Organizer</div>
+            <div class="project-caption-head"><h3>My Recipe Collection</h3><a class="proj-link" href="https://my-recipe-collection.vercel.app/" target="_blank" rel="noopener">Visit live site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            <p>A recipe collection app built with Ionic, Angular, and Firebase to securely create, manage, search, and organize favorite recipes.</p>
+            <div class="mini-tags"><span>Angular</span><span>Ionic</span><span>Firebase</span></div>
+          </div>
+        </article>
+      </div>
+      <button class="project-arrow project-arrow--prev" type="button" aria-label="Previous project" aria-controls="projectViewport" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="project-arrow project-arrow--next" type="button" aria-label="Next project" aria-controls="projectViewport" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+      <div class="project-navigation" hidden>
+        <div class="project-dots" aria-label="Choose a project">
+          <button class="project-dot" type="button" aria-label="Show PinyaSense" aria-controls="projectViewport" aria-current="true"><span></span></button>
+          <button class="project-dot" type="button" aria-label="Show Sulyap Calapan" aria-controls="projectViewport"><span></span></button>
+          <button class="project-dot" type="button" aria-label="Show GORA" aria-controls="projectViewport"><span></span></button>
+          <button class="project-dot" type="button" aria-label="Show My Recipe Collection" aria-controls="projectViewport"><span></span></button>
+          <button class="project-dot" type="button" aria-label="Show Cedrick Rojas Portfolio" aria-controls="projectViewport"><span></span></button>
+        </div>
+        <span class="project-count" aria-live="polite" aria-atomic="true">01 / 04</span>
       </div>
     </div>
   </div>
@@ -666,12 +654,12 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
       <p>Tools and technologies across the full software and hardware pipeline.</p>
     </div>
     <div class="skills-grid stagger">
-      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div><h4>Frontend</h4><span class="sc-num">01</span></div><div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">React.js</span><span class="tag">Next.js</span><span class="tag">Tailwind CSS</span></div></div>
-      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div><h4>Backend</h4><span class="sc-num">02</span></div><div class="tags"><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">REST APIs</span></div></div>
+      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div><h4>Frontend</h4><span class="sc-num">01</span></div><div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">React.js</span><span class="tag">Vue.js</span><span class="tag">Angular</span><span class="tag">Ionic</span><span class="tag">Next.js</span><span class="tag">Tailwind CSS</span></div></div>
+      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div><h4>Backend</h4><span class="sc-num">02</span></div><div class="tags"><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">REST APIs</span><span class="tag">Firebase</span></div></div>
       <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div><h4>Database</h4><span class="sc-num">03</span></div><div class="tags"><span class="tag">MongoDB</span><span class="tag">MySQL</span></div></div>
       <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6M13 4l-2 16"/></svg></div><h4>Languages</h4><span class="sc-num">04</span></div><div class="tags"><span class="tag">C#</span><span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript</span></div></div>
-      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg></div><h4>IoT &amp; Embedded</h4><span class="sc-num">05</span></div><div class="tags"><span class="tag">Arduino</span><span class="tag">Sensor Integration</span><span class="tag">IoT Development</span></div></div>
-      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 00-5.4 5.4l-6 6a2 2 0 102.8 2.8l6-6a4 4 0 005.4-5.4l-2.5 2.5-2.8-.7-.7-2.8z"/></svg></div><h4>Tools</h4><span class="sc-num">06</span></div><div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">Postman</span></div></div>
+      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg></div><h4>IoT &amp; AI</h4><span class="sc-num">05</span></div><div class="tags"><span class="tag">Arduino</span><span class="tag">Sensor Integration</span><span class="tag">IoT Development</span><span class="tag">Machine Learning</span></div></div>
+      <div class="skill-card tilt"><div class="glare"></div><div class="sc-head"><div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 00-5.4 5.4l-6 6a2 2 0 102.8 2.8l6-6a4 4 0 005.4-5.4l-2.5 2.5-2.8-.7-.7-2.8z"/></svg></div><h4>Tools</h4><span class="sc-num">06</span></div><div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">Postman</span><span class="tag">Vercel</span></div></div>
     </div>
   </div>
 </section>
@@ -701,21 +689,17 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
         <h2>Let's build something.</h2>
         <p>Open to internships, project collaborations, and entry-level opportunities. Reach out — I usually reply within a day.</p>
         <div class="contact-channels stagger">
-          <a class="channel" href="https://github.com/cedrickrojas" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 00-.9-2.7c3-.3 6.2-1.5 6.2-6.9a5.4 5.4 0 00-1.5-3.7 5 5 0 00-.1-3.7s-1.2-.4-3.9 1.4a13.4 13.4 0 00-7 0C5.1.7 3.9 1.1 3.9 1.1a5 5 0 00-.1 3.7 5.4 5.4 0 00-1.5 3.7c0 5.4 3.2 6.6 6.2 6.9a3.4 3.4 0 00-.9 2.7V22"/></svg></span><span class="ct"><small>GitHub</small><b>@cedrickrojas</b></span></a>
           <a class="channel" href="mailto:rojascedrick543@gmail.com"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5l9 6 9-6"/></svg></span><span class="ct"><small>Email</small><b>rojascedrick543@gmail.com</b></span></a>
           <a class="channel" href="https://www.facebook.com/zxd.wrld" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h2.5l.5-3H14V4.5c0-.88.29-1.5 1.62-1.5H17V.25A21.7 21.7 0 0014.88 0C12.56 0 11 1.42 11 4v2H8v3h3v11h3V9z"/></svg></span><span class="ct"><small>Facebook</small><b>@zxd.wrld</b></span></a>
         </div>
       </div>
-      <form class="form-card reveal" id="contactForm" action="https://formsubmit.co/rojascedrick543@gmail.com" method="post" aria-describedby="contactHint">
-        <input type="hidden" name="_subject" value="New portfolio inquiry - Cedrick Rojas" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
-        <div class="field"><label for="cname">Name</label><input id="cname" name="name" type="text" placeholder="YOUR NAME" autocomplete="name" required /></div>
-        <div class="field"><label for="cemail">Email</label><input id="cemail" name="email" type="email" placeholder="YOU@EXAMPLE.COM" autocomplete="email" required /></div>
-        <div class="field"><label for="cmsg">Message</label><textarea id="cmsg" name="message" placeholder="TELL ME ABOUT THE ROLE OR PROJECT" required></textarea></div>
+      <form class="form-card reveal" id="contactForm" action="/api/contact" method="post">
+        <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="field"><label for="cname">Name</label><input id="cname" name="name" type="text" placeholder="YOUR NAME" autocomplete="name" maxlength="100" required /></div>
+        <div class="field"><label for="cemail">Email</label><input id="cemail" name="email" type="email" placeholder="YOU@EXAMPLE.COM" autocomplete="email" maxlength="254" required /></div>
+        <div class="field"><label for="cmsg">Message</label><textarea id="cmsg" name="message" placeholder="TELL ME ABOUT THE ROLE OR PROJECT" maxlength="5000" required></textarea></div>
         <button class="btn btn-primary" id="sendBtn" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> <span id="sendLabel">Send Message</span></button>
         <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
-        <p class="form-hint" id="contactHint">Prefer email? Write to <a href="mailto:rojascedrick543@gmail.com">rojascedrick543@gmail.com</a> directly.</p>
       </form>
     </div>
   </div>
@@ -726,7 +710,7 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
 <footer>
   <div class="wrap foot-inner">
     <p>© <span id="year"></span> Cedrick Rojas · Built with care.</p>
-    <div class="foot-soc"><a href="https://github.com/cedrickrojas" target="_blank" rel="noopener">GitHub</a><a href="https://www.instagram.com/zxd.wrld" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/zxd.wrld" target="_blank" rel="noopener">Facebook</a><a href="mailto:rojascedrick543@gmail.com">Email</a></div>
+    <div class="foot-soc"><a href="https://www.facebook.com/zxd.wrld" target="_blank" rel="noopener">Facebook</a><a href="mailto:rojascedrick543@gmail.com">Email</a></div>
   </div>
 </footer>
 
@@ -752,7 +736,6 @@ function applyTheme(theme){
     var isLight = theme === 'light';
     themeToggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
     themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
-    themeToggle.querySelector('span').textContent = isLight ? 'Dark' : 'Light';
   }
   if(themeMeta){ themeMeta.setAttribute('content', theme === 'light' ? '#F6F4EE' : '#0A0C0A'); }
 }
@@ -944,18 +927,69 @@ if(themeToggle){
   size(); draw();
 })();
 
-/* ===== LIVE DASHBOARD VALUES ===== */
+/* ===== PROJECT SCREENSHOT CAROUSEL ===== */
 (function(){
-  if(REDUCE) return;
-  var soil=document.getElementById('m-soil'), temp=document.getElementById('m-temp');
-  if(!soil||!temp) return;
-  setInterval(function(){
-    var s=60+Math.round(Math.random()*6), t=(28.8+Math.random()*1.4);
-    soil.textContent=s; temp.textContent=t.toFixed(1);
-  },2200);
+  var root=document.querySelector('.project-showcase');
+  if(!root) return;
+  var viewport=root.querySelector('.project-viewport');
+  var slides=Array.from(root.querySelectorAll('.project-slide'));
+  var dots=Array.from(root.querySelectorAll('.project-dot'));
+  var previous=root.querySelector('.project-arrow--prev');
+  var next=root.querySelector('.project-arrow--next');
+  var count=root.querySelector('.project-count');
+  var current=0, target=null, frame=0, settled;
+  if(slides.length<2) return;
+  root.classList.add('is-ready');
+  previous.hidden=false;
+  next.hidden=false;
+  root.querySelector('.project-navigation').hidden=false;
+
+  function update(){
+    var center=viewport.getBoundingClientRect().left+viewport.clientWidth/2;
+    var distance=Infinity;
+    slides.forEach(function(slide,index){
+      var rect=slide.getBoundingClientRect();
+      var delta=Math.abs(rect.left+rect.width/2-center);
+      if(delta<distance){ distance=delta; current=index; }
+    });
+    dots.forEach(function(dot,index){
+      if(index===current) dot.setAttribute('aria-current','true');
+      else dot.removeAttribute('aria-current');
+    });
+    slides.forEach(function(slide,index){ slide.classList.toggle('is-active',index===current); });
+    count.textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+    frame=0;
+  }
+  function go(index,behavior){
+    target=(index+slides.length)%slides.length;
+    var rect=slides[target].getBoundingClientRect();
+    var left=viewport.scrollLeft+rect.left-viewport.getBoundingClientRect().left-(viewport.clientWidth-rect.width)/2;
+    viewport.scrollTo({left:left,behavior:behavior||(REDUCE?'auto':'smooth')});
+  }
+  previous.addEventListener('click',function(){ go((target===null?current:target)-1); });
+  next.addEventListener('click',function(){ go((target===null?current:target)+1); });
+  dots.forEach(function(dot,index){ dot.addEventListener('click',function(){ go(index); }); });
+  viewport.addEventListener('scroll',function(){
+    if(!frame) frame=requestAnimationFrame(update);
+    clearTimeout(settled);
+    settled=setTimeout(function(){ target=null; update(); },180);
+  },{passive:true});
+  viewport.addEventListener('keydown',function(event){
+    if(event.target!==viewport) return;
+    var index=target===null?current:target;
+    if(event.key==='ArrowRight') index++;
+    else if(event.key==='ArrowLeft') index--;
+    else if(event.key==='Home') index=0;
+    else if(event.key==='End') index=slides.length-1;
+    else return;
+    event.preventDefault();
+    go(index);
+  });
+  window.addEventListener('resize',function(){ go(target===null?current:target,'auto'); });
+  update();
 })();
 
-/* ===== CONTACT FORM VIA FORMSUBMIT ===== */
+/* ===== CONTACT FORM VIA GMAIL SMTP ===== */
 (function(){
   var form=document.getElementById('contactForm'), msg=document.getElementById('formMsg');
   var btn=document.getElementById('sendBtn'), label=document.getElementById('sendLabel');
@@ -968,50 +1002,77 @@ if(themeToggle){
       msg.classList.remove('show');
     });
   });
-  form.addEventListener('submit',function(event){
-    if(submitting){ event.preventDefault(); return; }
+  form.addEventListener('submit',async function(event){
+    event.preventDefault();
+    if(submitting) return;
     fields.forEach(function(field){
       field.value=field.value.trim();
       field.setCustomValidity(field.value.trim() ? '' : 'Please fill in this field.');
     });
-    if(!form.reportValidity()){ event.preventDefault(); return; }
+    if(!form.reportValidity()) return;
+    var payload=Object.fromEntries(new FormData(form));
     submitting=true;
     btn.disabled=true;
-    label.textContent='Submitting...';
+    fields.forEach(function(field){ field.readOnly=true; });
+    label.textContent='Sending...';
     form.setAttribute('aria-busy','true');
-    msg.textContent='Continue on the next page to complete verification and submit your message.';
+    msg.style.color='var(--muted)';
+    msg.textContent='Sending your message...';
     msg.classList.add('show');
-    // Allow the browser to POST to FormSubmit, including its verification flow.
-  });
-  window.addEventListener('pageshow',function(){
-    submitting=false;
-    btn.disabled=false;
-    label.textContent='Send Message';
-    form.removeAttribute('aria-busy');
-    msg.textContent='';
-    msg.classList.remove('show');
+    var controller=new AbortController();
+    var timeout=setTimeout(function(){ controller.abort(); },35000);
+    try{
+      var response=await fetch(form.action,{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify(payload),
+        signal:controller.signal
+      });
+      var result=await response.json();
+      if(!response.ok || result.success!==true){
+        throw new Error('Submission was not confirmed.');
+      }
+      form.reset();
+      msg.style.color='var(--sage)';
+      msg.textContent='Message sent. Thanks for reaching out!';
+    } catch(error){
+      msg.style.color='#c96b5a';
+      msg.textContent='Unable to confirm sending. Your message is still here. Please try again later or email rojascedrick543@gmail.com directly.';
+    } finally{
+      clearTimeout(timeout);
+      submitting=false;
+      btn.disabled=false;
+      fields.forEach(function(field){ field.readOnly=false; });
+      label.textContent='Send Message';
+      form.removeAttribute('aria-busy');
+    }
   });
 })();
 
 /* ===== PROJECT CTA TO CONTACT ===== */
 (function(){
-  var cta=document.querySelector('.proj-link[href="#contact"]');
+  var ctas=document.querySelectorAll('[data-project][href="#contact"]');
   var contact=document.getElementById('contact');
   var name=document.getElementById('cname');
   var email=document.getElementById('cemail');
   var message=document.getElementById('cmsg');
-  if(!cta || !contact || !message) return;
-  var project=cta.getAttribute('data-project') || 'this project';
-  var template='Hi Cedrick, I\'m interested in ' + project + '. I\'d like to talk about how it was built and whether you are available for collaboration.';
-  cta.addEventListener('click',function(e){
-    e.preventDefault();
-    contact.scrollIntoView({behavior:REDUCE?'auto':'smooth',block:'start'});
-    if(!message.value.trim()) message.value=template;
-    setTimeout(function(){
-      if(name && !name.value.trim()) name.focus({preventScroll:true});
-      else if(email && !email.value.trim()) email.focus({preventScroll:true});
-      else message.focus({preventScroll:true});
-    }, REDUCE ? 0 : 500);
+  if(!ctas.length || !contact || !message) return;
+  ctas.forEach(function(cta){
+    var project=cta.getAttribute('data-project') || 'this project';
+    var template='Hi Cedrick, I\'m interested in ' + project + '. I\'d like to talk about how it was built and whether you are available for collaboration.';
+    cta.addEventListener('click',function(e){
+      e.preventDefault();
+      contact.scrollIntoView({behavior:REDUCE?'auto':'smooth',block:'start'});
+      if(!message.value.trim()){
+        message.value=template;
+        message.setCustomValidity('');
+      }
+      setTimeout(function(){
+        if(name && !name.value.trim()) name.focus({preventScroll:true});
+        else if(email && !email.value.trim()) email.focus({preventScroll:true});
+        else message.focus({preventScroll:true});
+      }, REDUCE ? 0 : 500);
+    });
   });
 })();
 

@@ -1,0 +1,11 @@
+{
+  "name": "cedrick-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "engines": { "node": "22.x" },
+  "scripts": {
+    "build": "node scripts/build_site.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": { "nodemailer": "^10.1.2" }
+}
