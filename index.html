@@ -171,9 +171,10 @@ html[data-theme="light"] .theme-btn .sun{ opacity:1; transform:rotate(0) scale(1
 .hero-status{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:26px; }
 .hero-mobile-portrait{ display:none; }
 .theme-portrait{ position:relative; overflow:hidden; }
-.theme-portrait img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.theme-portrait .portrait-light{ opacity:0; object-position:center 68%; transform:scale(1.025); transition:opacity .55s var(--ease), transform .7s var(--ease-out); }
-html[data-theme="light"] .theme-portrait .portrait-light{ opacity:1; transform:scale(1); }
+.theme-portrait img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scale(1); transition:opacity .6s var(--ease), transform .75s var(--ease-out); }
+.theme-portrait .portrait-light{ opacity:0; object-position:center 68%; transform:translateY(8px) scale(1.035); }
+html[data-theme="light"] .theme-portrait .portrait-light{ opacity:1; transform:translateY(0) scale(1); }
+html[data-theme="light"] .theme-portrait .portrait-dark{ transform:scale(1.035); }
 .status-chip{ font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; color:var(--ink-2); display:inline-flex; align-items:center; gap:8px; padding:7px 13px; border-radius:99px; background:var(--surface); border:1px solid var(--line); backdrop-filter:blur(6px); }
 .dot{ width:7px; height:7px; border-radius:50%; background:var(--sage); box-shadow:0 0 0 0 rgba(132,174,144,.6); animation:pulse 2.4s infinite var(--ease); }
 @keyframes pulse{ 0%{box-shadow:0 0 0 0 rgba(132,174,144,.5)} 70%{box-shadow:0 0 0 7px rgba(132,174,144,0)} 100%{box-shadow:0 0 0 0 rgba(132,174,144,0)} }
@@ -530,7 +531,7 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
       </div>
       <div class="hero-mobile-portrait theme-portrait" role="img" aria-label="Cedrick Rojas portrait">
         <img class="portrait-dark" src="picture/legitnaprofile.jpg" alt="" width="1959" height="1885" />
-        <img class="portrait-light" src="picture/portrait-light.jpg" alt="" width="1034" height="1837" />
+        <img class="portrait-light" src="picture/portrait-light-masquerade.png" alt="" width="941" height="1672" />
       </div>
       <h1>
         <span class="line"><span class="line-i hi">Cedrick Rojas</span></span>
@@ -575,7 +576,7 @@ footer{ padding:40px 0; border-top:1px solid var(--line); position:relative; z-i
       </div>
       <div class="portrait theme-portrait" role="img" aria-label="Cedrick Rojas portrait">
         <img class="portrait-dark" src="picture/legitnaprofile.jpg" alt="" width="1959" height="1885" />
-        <img class="portrait-light" src="picture/portrait-light.jpg" alt="" width="1034" height="1837" />
+        <img class="portrait-light" src="picture/portrait-light-masquerade.png" alt="" width="941" height="1672" />
         <div class="scan" aria-hidden="true"></div>
         <div class="sweep" aria-hidden="true"></div>
       </div>
